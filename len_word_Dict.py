@@ -1,24 +1,22 @@
 words ={}
-LineNum = 0
-#test_data = ["", "123"," @#"]
+def addToDict(test_line):
+    for line in open("sowpods.txt"):
+        line = line.strip()
+        if line == test_line:
+            return "valid"
+        else:
+            return "invalid"
+        if len(line) not in words:
+            words[len(line)] = []
+        words[len(line)].append(line)
+     #print(words)
 
-#test_data = ["", "123"," @#"]
-def test_case(line):
-    test_data = ["", "123"," @#"]
-    if line not in test_data:
-        return "valid"
+
+for line in open("testdata.txt"):
+    line = line.split()
+    if addToDict(line[0]) == line[1]:
+        print("True")
     else:
-        return "invalid"
+        print("False")
 
-
-for line in open("sowpods.txt"):
-    line = line.strip()
-    if test_case(line) == "invalid":
-        print("invalid")
-        print(line)
-        break
-    if len(line) not in words:
-        words[len(line)] = []
-    words[len(line)].append(line)
-print(words)
 
