@@ -15,7 +15,7 @@ def patternmatch2(string, length, words):
     print(a)
     insertM(string, words, a, length)
 
-def presence_of_characters(string):
+def presence_of_characters(length,string):
     k = 0
     h ={}
     for j in range(0,len(string)):
@@ -32,11 +32,18 @@ def insertM(string, words, a, length):
         for j in a:
             if a[j] == i[j]:
                 string = i
-                print(string)
+    print(string)
 
 
-string = " ou  "
-length = len(string)
-words = {2: ['hi', 'to'], 3: ['how', 'are', 'you', 'for', 'the', 'you'], 4: ['find', 'hear', 'from', 'hare'], 5: ['happy', 'could', 'cloud'], 7: ['concern'], 8: ['thankyou']}
+#string = "h p  "
+#length = len(string)
+#Test Data
+words = {2: ['hi', 'to', 'as'], 3: ['how', 'are', 'you', 'for', 'the'], 4: ['find', 'hear', 'from', 'hare'], 5: ['happy', 'could', 'cloud'], 7: ['concern'], 8: ['thankyou']}
+length = 0
+s = ""
+for i in open("input.txt"):
+    length = len(i) - 1
+    print(length)
+    presence_of_characters(length,i.strip('\n'))
+    
 
-presence_of_characters(string)
