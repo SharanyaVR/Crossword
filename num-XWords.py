@@ -40,5 +40,7 @@ h_num_locations = get_h_triads(grid, size)
 v_num_locations = get_v_triads(grid, size)
 numbers = assign_numbers(h_num_locations + v_num_locations)
 for loc in numbers.keys():
-    print(loc, numbers[loc])
-
+    li.append(loc) 
+l = 0    
+while l < len(li) :
+    hor_fill(li[l][0], li[l][1])
