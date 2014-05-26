@@ -68,23 +68,34 @@ def insertIntoCrossword(grid, s, indexofWord, locationofWord, acrossorDown, size
             grid = insertWordVertical(grid, s, locationofWord, size)
     return grid
 
-
+#TESTS
+def testInsertion(filename):
+    for line in open(filename):
+        grid, s, indexofWord, locationofWord, acrossorDown, size, resgrid= line.split()
+        grid = grid.split("!")
+        resgrid = resgrid.split("!")
+        grid = insertIntoCrossword(grid, s, indexofWord, locationofWord, acrossorDown, size)   
+        if resgrid == grid:
+            print("test has passed for grid:")
+        else:
+            print("test has failed")
+ 
 import sys
-size, gridstring, grid  = loadGrid(sys.argv[1])
-h_num_locations = get_h_triads(gridstring, size)
-v_num_locations = get_v_triads(gridstring, size)
-numbers = assign_numbers(h_num_locations + v_num_locations)
-for loc in numbers.keys():
+#size, gridstring, grid  = loadGrid(sys.argv[1])
+#h_num_locations = get_h_triads(gridstring, size)
+#v_num_locations = get_v_triads(gridstring, size)
+#numbers = assign_numbers(h_num_locations + v_num_locations)
+#for loc in numbers.keys():
+#   print(loc, numbers[loc])
 
-    print(loc, numbers[loc])
-grid = insertIntoCrossword(grid, "abc", 2, (2,1), 'a',size)
-print(grid)
+testInsertion("files/testinsertionintocrossword")
+#grid = insertIntoCrossword(grid, "abc", 2, (2,1), 'a',size)
+#print(grid)
+
+#li.append(loc) 
+#l = 0    
+#while l < len(li) :
+#    hor_fill(li[l][0], li[l][1])
 
 
-
-
-li.append(loc) 
-l = 0    
-while l < len(li) :
-    hor_fill(li[l][0], li[l][1])
 
