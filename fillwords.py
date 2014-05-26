@@ -1,13 +1,15 @@
 def hor_fill ( i, j):
-    while l[i][j] != 'X' :
-        s.append(l[i][j])
+    while grid[i][j] != 'X' :
+        s.append(grid[i][j])
         j += 1
-    insert(s)
+    presence_of_characters(s)
     ver_fill(i,j)
 
 def ver_fill( i, j):
-    while l[i][j] != 'X' :
+    while grid[i][j] != 'X' :
         s.append(l[i][j])
         i += 1
-    insert(s)
+    presence_of_characters(s)
+
+
 
