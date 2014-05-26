@@ -75,9 +75,16 @@ h_num_locations = get_h_triads(gridstring, size)
 v_num_locations = get_v_triads(gridstring, size)
 numbers = assign_numbers(h_num_locations + v_num_locations)
 for loc in numbers.keys():
+
     print(loc, numbers[loc])
 grid = insertIntoCrossword(grid, "abc", 2, (2,1), 'a',size)
 print(grid)
 
 
- 
+
+
+li.append(loc) 
+l = 0    
+while l < len(li) :
+    hor_fill(li[l][0], li[l][1])
+
