@@ -1,6 +1,6 @@
 words ={}
-def addToDict():
-    for line in open("sowpods.txt"):
+def addToDict(filename):
+    for line in open(filename):
         line = line.strip()
         if len(line) not in words:
             words[len(line)] = []
@@ -8,20 +8,16 @@ def addToDict():
     return words
 
 def test_func(filename):
-    words = addToDict()
-    s = ""
     for test_line in open(filename):
-        word, length, exp_output= test_line.split()
-        #print(word)
-        if word.upper() in words[int(length)]:
-            s = "True"
+        sampdict, exp_output= test_line.split('!')
+        words = addToDict(sampdict)
+        print(words)
+        print(exp_output)
+        if str(words) != exp_output:
+            print("test suceeded for " + sampdict)
         else:
-            s = "False"
-        if s == exp_output:
-            print("test suceeded for " + word)
-        else:
-            print("test failed for " + word)
+            print("test failed for " + sampdict)
 
-test_func("testdata.txt")
+test_func("testdict")
 
 
