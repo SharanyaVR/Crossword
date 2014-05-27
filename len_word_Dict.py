@@ -11,8 +11,7 @@ def test_func(testfile):
         sampdict, exp_output= test_line.split('!')
         words = {}
         words = addToDict(sampdict, words)
-        #print(words)
-        #print(exp_output)
+        exp_output = exp_output.strip("\n")
         if str(words) in exp_output:
             print("test suceeded for " + sampdict)
         else:
