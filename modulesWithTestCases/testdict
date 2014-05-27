@@ -1,0 +1,3 @@
+sampledict!{1: ['a', 'b', 'c'], 2: ['ab', 'bc'], 5: ['abcde']}
+sampldict1!{2: ['hi', 'he', 'so'], 3: ['cab', 'map'], 4: ['show']}
+sampldict2!{1: ['a', 'b', 'c', 'c'], 5: ['happy', 'sleep'], 8: ['thankyou']}
