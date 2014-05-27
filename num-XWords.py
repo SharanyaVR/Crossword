@@ -51,7 +51,7 @@ def insertWordVertical(grid, s, row, col, size):
         row += 1
     return grid
 
-def insertIntoCrossword(grid, s, indexofWord, locationofWord, acrossorDown, size):
+def insertIntoCrossword(grid, s, locationofWord, acrossorDown, size):
     if s != None:
         col = int(locationofWord[1])
         row = int(locationofWord[0])       
@@ -61,18 +61,74 @@ def insertIntoCrossword(grid, s, indexofWord, locationofWord, acrossorDown, size
             grid = insertWordVertical(grid, s, row, col, size)
     return grid
 
-def hor_fill ( i, j):
+
+def patternmatch_empty(string, length, words):
+    l1 = words[length]
+    for i in l1:
+        string = i
+        
+    return string
+
+def patternmatch_nonempty(string, length, words):
+    k = 0
+    a = {}
+    for i in range(0,length):
+        if string[i] == " ":
+            i += 1
+        else:
+            a[i] = string[i]
+    return insertM(string, words, a, length)
+
+def presence_of_characters(length,string, words):
+    k = 0
+    h ={}
+    print(length)
+    for j in range(0,length):
+        if string[j] !=" ":
+            k += 1
+    if k == 0:
+        string = patternmatch_empty(string,length,words)
+    else:
+        string = patternmatch_nonempty(string,length,words)
+    return string
+
+def insertM(string, words, a, length):
+    print(length)
+    for i in words[length]:
+        for j in a:
+            if a[j] == i[j]:
+                string = i
+    return string
+
+def addToDict(filename):
+    for line in open(filename):
+        line = line.strip()
+        if len(line) not in words:
+            words[len(line)] = []
+        words[len(line)].append(line)
+    return words
+   
+def hor_fill ( i, j,grid, words):
+    tup = (i,j)
+    s = []
     while grid[i][j] != 'X' :
         s.append(grid[i][j])
         j += 1
-        presence_of_characters(str(s))
-        ver_fill(i,j)
+        print(len(str(s)))
+        st = presence_of_characters(len(str(s)), str(s), words)
+        grid = insertIntoCrossword(grid, st, tup, 'a', len(grid)) 
+        grid = ver_fill(i,j,grid,words)
+    return grid
         
-def ver_fill( i, j):
+def ver_fill( i, j,grid, words):
+    tup = (i, j)
+    s = []
     while grid[i][j] != 'X' :
         s.append(l[i][j])
         i += 1
-        presence_of_characters(str(s))
+        st = presence_of_characters(len(s), str(s), words)
+        grid = insertIntoCrossword(grid, st, tup, 'd', len(grid))
+        return grid
 
 
 #TESTS
@@ -100,13 +156,18 @@ def testInsertion(filename):
 
 import sys
 size, gridstring,grid = loadGrid(sys.argv[1])
-h_num_locations = get_h_triads(grid, size)
-v_num_locations = get_v_triads(grid, size)
+h_num_locations = get_h_triads(gridstring, size)
+v_num_locations = get_v_triads(gridstring, size)
 numbers = assign_numbers(h_num_locations + v_num_locations)
+li = []
 for loc in numbers.keys():
     li.append(loc) 
-l = 0    
+print(li)
+l = 0 
+words = {}
+words = addToDict("files/sowpods.txt")
 while l < len(li) :
-    hor_fill(li[l][0], li[l][1])
-
-testInsertion("files/testinsertionintocrossword")
+    grid = hor_fill(li[l][0], li[l][1],grid, words)
+for row in grid:
+    print(row)
+#testInsertion("files/testinsertionintocrossword")
