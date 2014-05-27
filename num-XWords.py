@@ -34,17 +34,13 @@ def assign_numbers(locations):
             numbers[location] = number
     return numbers
 
-#def backtrackLastInsertion(indexofLastWordInserted):
-#    location = getLocationofWordIndex(indexofLastWordInserted)
      
 def insertWordHorizontal(grid, s, row, col, size):
     newstr = list(grid[row])
     for ch in s:
         newstr[col] = ch
         col += 1
-    print(newstr)
     grid[row] = ''.join(newstr)
-    print(grid)
     return grid
 
 def insertWordVertical(grid, s, row, col, size):
@@ -57,29 +53,37 @@ def insertWordVertical(grid, s, row, col, size):
 
 def insertIntoCrossword(grid, s, indexofWord, locationofWord, acrossorDown, size):
     if s != None:
-        print(s)
-        col = locationofWord[1]    
-        row = locationofWord[0]       
+        col = int(locationofWord[1])
+        row = int(locationofWord[0])       
         if acrossorDown == 'a':
             grid = insertWordHorizontal(grid, s, row, col, size)
-            print("if")
         else:
-            print("else")
-            grid = insertWordVertical(grid, s, locationofWord, size)
+            grid = insertWordVertical(grid, s, row, col, size)
     return grid
 
 #TESTS
 def testInsertion(filename):
+    grid = []
     for line in open(filename):
-        grid, s, indexofWord, locationofWord, acrossorDown, size, resgrid= line.split()
-        grid = grid.split("!")
-        resgrid = resgrid.split("!")
-        grid = insertIntoCrossword(grid, s, indexofWord, locationofWord, acrossorDown, size)   
-        if resgrid == grid:
-            print("test has passed for grid:")
+        gridfile, s, row, col, acrossorDown, resgridfile = line.split()
+        for line in open(gridfile):
+            grid.append(line.strip())
+        size = len(grid)
+        locationofWord = (row, col)
+        grid = insertIntoCrossword(grid, s, 2, locationofWord, acrossorDown, size)
+        i = 0
+        for line in open(resgridfile):
+            st = (line.strip("\n"))
+            if str(st) == grid[i]:
+                i += 1
+            else:
+                break
+        if i == size:
+            print("test passed for crossword" + gridfile)
         else:
-            print("test has failed")
- 
+            print("test failed for crossword" + gridfile)
+        grid = []
+
 import sys
 #size, gridstring, grid  = loadGrid(sys.argv[1])
 #h_num_locations = get_h_triads(gridstring, size)
