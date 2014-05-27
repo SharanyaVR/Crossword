@@ -1,0 +1,3 @@
+123 invalid
+ALL valid
+@# invalid

@@ -1,24 +1,23 @@
 words ={}
-LineNum = 0
-#test_data = ["", "123"," @#"]
+def addToDict(filename):
+    for line in open(filename):
+        line = line.strip()
+        if len(line) not in words:
+            words[len(line)] = []
+        words[len(line)].append(line)
+    return words
 
-#test_data = ["", "123"," @#"]
-def test_case(line):
-    test_data = ["", "123"," @#"]
-    if line not in test_data:
-        return "valid"
-    else:
-        return "invalid"
+def test_func(filename):
+    for test_line in open(filename):
+        sampdict, exp_output= test_line.split('!')
+        words = addToDict(sampdict)
+        print(words)
+        print(exp_output)
+        if str(words) != exp_output:
+            print("test suceeded for " + sampdict)
+        else:
+            print("test failed for " + sampdict)
 
+test_func("testdict")
 
-for line in open("sowpods.txt"):
-    line = line.strip()
-    if test_case(line) == "invalid":
-        print("invalid")
-        print(line)
-        break
-    if len(line) not in words:
-        words[len(line)] = []
-    words[len(line)].append(line)
-print(words)
 

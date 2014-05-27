@@ -1,2 +1,2 @@
-s a X
- t i gX
+Xs tX,s t 
+Xt i X,t i 
