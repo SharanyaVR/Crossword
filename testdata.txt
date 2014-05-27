@@ -1,3 +1,5 @@
-123 invalid
-ALL valid
-@# invalid
+happy 5 True
+sorrow 7 True
+sleep 4 False
+hope 5 False
+all 3 True
