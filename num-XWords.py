@@ -44,3 +44,17 @@ for loc in numbers.keys():
 l = 0    
 while l < len(li) :
     hor_fill(li[l][0], li[l][1])
+
+
+def hor_fill ( i, j):
+    while grid[i][j] != 'X' :
+       s.append(grid[i][j])
+       j += 1
+    presence_of_characters(str(s))
+    ver_fill(i,j)
+
+def ver_fill( i, j):
+    while grid[i][j] != 'X' :
+        s.append(l[i][j])  
+        i += 1
+     presence_of_characters(str(s))
